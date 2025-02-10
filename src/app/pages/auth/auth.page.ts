@@ -7,19 +7,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent, IonIcon } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 import { addIcons } from 'ionicons';
-import { lockClosedOutline, mailOutline } from 'ionicons/icons';
+import { lockClosedOutline, mailOutline, logInOutline, personAddOutline } from 'ionicons/icons';
 import { IonButton } from '@ionic/angular/standalone';
+import { LogoComponent } from "../../shared/components/logo/logo.component";
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonIcon, 
     HeaderComponent,
     IonContent,
     CommonModule,
@@ -27,7 +28,8 @@ import { IonButton } from '@ionic/angular/standalone';
     CustomInputComponent,
     ReactiveFormsModule,
     IonButton,
-  ],
+    LogoComponent
+],
 })
 export class AuthPage implements OnInit {
   form = new FormGroup({
@@ -35,7 +37,7 @@ export class AuthPage implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
   constructor() {
-    addIcons({ mailOutline, lockClosedOutline });
+    addIcons({logInOutline,personAddOutline,mailOutline,lockClosedOutline});
   }
 
   ngOnInit() {}

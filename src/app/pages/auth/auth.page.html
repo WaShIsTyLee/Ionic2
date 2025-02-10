@@ -2,6 +2,8 @@
 <ion-content>
   <div class="d-flex-center">
     <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()">
+      <app-logo></app-logo>
+
       <app-custom-input
         icon="mail-outline"
         autocomplete="email"
@@ -37,6 +39,11 @@
           Debe especificar una contraseña
         </div>
       </div>
+
+      <p class="ion-text-end" routerLink="/forgot-password">
+        Olvidé mi contraseña
+      </p>
+
       <ion-button
         mode="ios"
         expand="block"
@@ -45,6 +52,18 @@
         [disabled]="form.invalid"
       >
         Iniciar sesión
+       <ion-icon slot="end" name="log-in-outline"></ion-icon> 
+      </ion-button>
+
+      <ion-button
+        routerLink="/sign-up"
+        class="ion-margin-top"
+        mode="ios"
+        expand="block"
+        fill="outline"
+      >
+        Crear usuario
+        <ion-icon slot="end" name="person-add-outline"></ion-icon>
       </ion-button>
     </form>
   </div>
