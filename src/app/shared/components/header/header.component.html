@@ -1,8 +1,10 @@
-  <ion-header class="ion-no-border">
-    <ion-toolbar color="primary">
-      <ion-title>
-        <strong>{{title}}</strong>
-        <div class="wmm">JuMaViajes</div></ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="backButtonURL" [defaultHref]="backButtonURL"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <strong>{{title}}</strong>
+      <div class="wmm">JuMaViajes</div></ion-title>
+  </ion-toolbar>
+</ion-header>
