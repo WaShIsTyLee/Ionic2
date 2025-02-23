@@ -12,8 +12,12 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "",
     appId: ""
+  },
+  supabaseConfig: {
+    projectURl: "",
+    apiKey: "",
+    bucket: ""
   }
-  
 };
 
 /*
