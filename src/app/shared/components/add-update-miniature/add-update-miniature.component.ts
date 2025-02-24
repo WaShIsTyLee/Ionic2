@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -15,7 +15,6 @@ import {
 } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
-import { SupabaseService } from 'src/app/services/supabase.service';
 import { addIcons } from 'ionicons';
 import {
   lockClosedOutline,
@@ -30,6 +29,8 @@ import { IonButton, IonAvatar } from '@ionic/angular/standalone';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { User } from 'src/app/models/user.model';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Miniature } from 'src/app/models/miniature.model';
+import { SupabaseService } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-add-update-miniature',
@@ -48,7 +49,8 @@ import { UtilsService } from 'src/app/services/utils.service';
   ],
 })
 export class AddUpdateMiniatureComponent implements OnInit {
-  supabaseService = inject(SupabaseService);
+  @Input() miniature: Miniature | null = null;
+  supabaseService = inject (SupabaseService);
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
 
@@ -58,8 +60,8 @@ export class AddUpdateMiniatureComponent implements OnInit {
     id: new FormControl(''),
     image: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    units: new FormControl('', [Validators.required, Validators.min(1)]),
-    strength: new FormControl('', [Validators.required, Validators.min(0)]),
+    units: new FormControl(1, [Validators.required, Validators.min(1)]),
+    strength: new FormControl(0, [Validators.required, Validators.min(0)]),
   });
 
   constructor() {
@@ -75,6 +77,9 @@ export class AddUpdateMiniatureComponent implements OnInit {
   }
   ngOnInit() {
     this.user = this.utilsService.getFromLocalStorage('user');
+    if (this.miniature) {
+      this.form.setValue(this.miniature)
+    }
   }
 
   async takeImage() {
@@ -88,43 +93,95 @@ export class AddUpdateMiniatureComponent implements OnInit {
 
   async submit() {
     if (this.form.valid) {
-      const loading = await this.utilsService.loading();
-      await loading.present();
+      if (this.miniature) {
+        this.UpdateMiniature();
+      } else {
+        this.createMiniature();
+      }
+    }
+  }
 
-      const path: string = `users/${this.user.uid}/miniatures`;
+  async createMiniature() {
+    const loading = await this.utilsService.loading();
+    await loading.present();
+
+    const path: string = `users/${this.user.uid}/miniatures`;
+    const imageDataUrl = this.form.value.image;
+    const imagePath = `${this.user.uid}/${Date.now()}`;
+    const imageUrl = await this.supabaseService.uploadImage(
+      imagePath,
+      imageDataUrl!
+    );
+    this.form.controls.image.setValue(imageUrl);
+    delete this.form.value.id;
+
+    this.firebaseService
+      .addDocument(path, this.form.value)
+      .then(async (res) => {
+        this.utilsService.dismissModal({ success: true });
+        this.utilsService.presentToast({
+          message: 'Mininatura añadida exitosamente',
+          duration: 1500,
+          color: 'success',
+          position: 'middle',
+          icon: 'checkmark-circle-outline',
+        });
+      })
+      .catch((error) => {
+        this.utilsService.presentToast({
+          message: error.message,
+          duration: 2500,
+          color: 'danger',
+          position: 'middle',
+          icon: 'alert-circle-outline',
+        });
+      })
+      .finally(() => {
+        loading.dismiss();
+      });
+  }
+
+  async UpdateMiniature() {
+    const loading = await this.utilsService.loading();
+    await loading.present();
+
+    const path: string = `users/${this.user.uid}/miniatures/${this.miniature!.id}`;
+    if (this.form.value.image != this.miniature!.image) {
       const imageDataUrl = this.form.value.image;
+      const oldImagePath = await this.supabaseService.getFilePath(this.miniature!.image)
+      this.supabaseService.deleteFile(oldImagePath!);
       const imagePath = `${this.user.uid}/${Date.now()}`;
       const imageUrl = await this.supabaseService.uploadImage(
-        imagePath,
+        imagePath!,
         imageDataUrl!
       );
       this.form.controls.image.setValue(imageUrl);
-      delete this.form.value.id;
-
-      this.firebaseService
-        .addDocument(path, this.form.value)
-        .then(async (res) => {
-          this.utilsService.dismissModal({ success: true });
-          this.utilsService.presentToast({
-            message: 'Mininatura añadida exitosamente',
-            duration: 1500,
-            color: 'success',
-            position: 'middle',
-            icon: 'checkmark-circle-outline',
-          });
-        })
-        .catch((error) => {
-          this.utilsService.presentToast({
-            message: error.message,
-            duration: 2500,
-            color: 'danger',
-            position: 'middle',
-            icon: 'alert-circle-outline',
-          });
-        })
-        .finally(() => {
-          loading.dismiss();
-        });
     }
+    delete this.form.value.id;
+
+    this.firebaseService
+      .updateDocument(path, this.form.value)
+      .then(async (res) => {
+        this.utilsService.dismissModal({ success: true });
+        this.utilsService.presentToast({
+          message: 'Mininatura editada exitosamente',
+          duration: 1500,
+          color: 'success',
+          position: 'middle',
+          icon: 'checkmark-circle-outline',
+        });
+      })
+      .catch((error) => {
+        this.utilsService.presentToast({
+          message: error.message,
+          duration: 2500,
+          color: 'danger',
+          position: 'middle',
+          icon: 'alert-circle-outline',
+        });
+      })
+      .finally(() => {
+        loading.dismiss();
+      });
   }
 }
