@@ -15,8 +15,7 @@ import {
   IonChip,
   IonSkeletonText,
   IonRefresher,
-  IonRefresherContent,
-} from '@ionic/angular/standalone';
+  IonRefresherContent, IonCard } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, createOutline, trashOutline, bodyOutline } from 'ionicons/icons';
 import { Miniature } from 'src/app/models/miniature.model';
@@ -33,7 +32,7 @@ import { QueryOptions } from 'src/app/services/query-options.interface';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonCard, 
     IonRefresherContent,
     IonRefresher,
     IonSkeletonText,
@@ -104,6 +103,10 @@ export class HomePage implements OnInit {
       });
 
     resetTimer();
+  }
+
+  getTotalPower() {
+    return this.miniatures.reduce((accumulator, miniature) =>  accumulator + miniature.strength * miniature.units, 0)
   }
 
   async addUpdateMiniature(miniature?: Miniature) {
