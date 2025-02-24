@@ -5,8 +5,8 @@ import { addIcons } from 'ionicons';
 import {
   IonContent,
   IonMenu,
-  IonMenuToggle, IonLabel, IonItem, IonIcon, IonRouterOutlet, IonTitle, IonFooter, IonToolbar } from '@ionic/angular/standalone';
-import { homeOutline, personOutline, logOutOutline, personCircleOutline } from 'ionicons/icons';
+  IonMenuToggle, IonLabel, IonItem, IonIcon, IonRouterOutlet, IonTitle, IonFooter, IonToolbar, IonAvatar } from '@ionic/angular/standalone';
+import { homeOutline, personOutline, logOutOutline, personCircleOutline, hardwareChipOutline } from 'ionicons/icons';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { HeaderComponent } from "../../shared/components/header/header.component";
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -18,7 +18,7 @@ import { User } from 'src/app/models/user.model';
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
   standalone: true,
-  imports: [IonFooter, IonRouterOutlet, IonIcon, IonItem, IonLabel,
+  imports: [IonAvatar, IonFooter, IonRouterOutlet, IonIcon, IonItem, IonLabel,
     IonContent,
     CommonModule,
     FormsModule,
@@ -41,22 +41,24 @@ export class MainPage implements OnInit {
       url: '/main/profile',
       icon: 'person-outline',
     },
+    {
+      title: 'Sensores',
+      url: '/main/sensors',
+      icon: 'hardware-chip-outline',
+    },
   ];
 
   user: User;
 
   constructor() {
-    addIcons({personCircleOutline,logOutOutline,personOutline,homeOutline});
+    addIcons({personCircleOutline,logOutOutline,personOutline,homeOutline, hardwareChipOutline});
     this.user = this.utilsService.getLocalStoredUser()!;
   }
 
   ngOnInit() {  }
 
   signOut() {
-    this.firebaseService.signOut().then(() => {
-      this.router.navigate(['/auth']).then(() => {
-        window.location.reload();
-      });
+    this.firebaseService.signOut().then(() => {this.utilsService.routerLink("/auth");
     });
   }
 }
