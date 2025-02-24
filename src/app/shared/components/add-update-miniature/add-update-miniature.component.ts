@@ -15,6 +15,7 @@ import {
 } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
+import { SupabaseService } from 'src/app/services/supabase.service';
 import { addIcons } from 'ionicons';
 import {
   lockClosedOutline,
@@ -47,6 +48,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   ],
 })
 export class AddUpdateMiniatureComponent implements OnInit {
+  supabaseService = inject(SupabaseService);
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
 
@@ -92,7 +94,7 @@ export class AddUpdateMiniatureComponent implements OnInit {
       const path: string = `users/${this.user.uid}/miniatures`;
       const imageDataUrl = this.form.value.image;
       const imagePath = `${this.user.uid}/${Date.now()}`;
-      const imageUrl = await this.firebaseService.uploadImage(
+      const imageUrl = await this.supabaseService.uploadImage(
         imagePath,
         imageDataUrl!
       );
