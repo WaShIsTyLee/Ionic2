@@ -1,19 +1,59 @@
 ion-avatar {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
-}
-
-.photo-btn {
+  }
+  
+  .photo-btn {
     position: relative;
     bottom: 25px;
-}
-
-ion-item {
+  }
+  
+  ion-item {
     padding-top: 15px;
-}
-
-.empty-icon {
-    font-size:140px;
+  }
+  
+  .empty-icon {
+    font-size: 180px;
     opacity: 30%;
-}
+  }
+  
+  /* Contenedor del campo de texto */
+  .update-name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 320px;
+    margin: 20px auto;
+  }
+  
+  .update-name-input {
+    width: 100%;
+    max-width: 320px;
+    --border-radius: 12px; /* Bordes redondeados */
+    --padding-start: 10px; /* Padding dentro del campo de texto */
+  }
+  
+  /* Contenedor de botones (para ponerlos al lado) */
+  .buttons-container {
+    display: flex;
+    gap: 15px; /* Espacio entre los botones */
+    justify-content: center; /* Centra los botones en el contenedor */
+    margin-top: 20px; /* Espacio superior */
+  }
+  
+  /* Estilo común para los botones */
+  .update-name-btn, .delete-image-btn {
+    font-size: 15px;  /* Aumentamos el tamaño de la fuente */
+    padding: 12px 18px;  /* Aumentamos el padding para hacerlos más grandes */
+    height: 60px;  /* Aumentamos la altura del botón */
+    min-height: 50px;
+    --border-radius: 8px;
+    width: 190px;  /* Aumentamos el tamaño de los botones */
+  }
+  
+
+  
