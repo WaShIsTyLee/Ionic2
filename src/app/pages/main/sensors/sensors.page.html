@@ -28,15 +28,4 @@
       <p>Gamma: {{ orientationData.gamma | number:'1.1-1' }}</p>
     </ion-card-content>
   </ion-card>
-
-  <!-- Tarjeta Estado de la Batería -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Batería</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p><strong>Nivel:</strong> {{ batteryLevel }}%</p>
-      <p><strong>Estado:</strong> {{ isPlugged ? 'Cargando 🔌' : 'No cargando 🔋' }}</p>
-    </ion-card-content>
-  </ion-card>
 </ion-content>

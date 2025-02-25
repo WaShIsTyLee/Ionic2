@@ -79,12 +79,6 @@ export class SensorsPage implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.position = data;
       });
-
-    // ⚡ Suscribirse a los cambios de batería
-    this.batterySubscription = this.batteryStatus.onChange().subscribe(status => {
-      this.batteryLevel = status.level; // Guardar el nivel de batería (0-100)
-      this.isPlugged = status.isPlugged; // Saber si está cargando
-    });
   }
 
   ngOnDestroy() {
