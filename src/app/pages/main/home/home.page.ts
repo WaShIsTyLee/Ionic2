@@ -15,7 +15,7 @@ import {
   IonChip,
   IonSkeletonText,
   IonRefresher,
-  IonRefresherContent, IonCard } from '@ionic/angular/standalone';
+  IonRefresherContent, IonCard, IonInput, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, createOutline, trashOutline, bodyOutline } from 'ionicons/icons';
 import { Miniature } from 'src/app/models/miniature.model';
@@ -32,7 +32,7 @@ import { QueryOptions } from 'src/app/services/query-options.interface';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonCard, 
+  imports: [IonButton, IonInput, IonCard, 
     IonRefresherContent,
     IonRefresher,
     IonSkeletonText,

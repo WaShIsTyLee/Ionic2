@@ -4,4 +4,4 @@ export interface Miniature {
     image: string;
     units: number;
     strength: number;
-  } 
+  }

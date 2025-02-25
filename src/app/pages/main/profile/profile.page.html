@@ -1,17 +1,38 @@
 <app-header title="Perfil" [showMenuButton]="true"></app-header>
+<ion-item button detail>
+  <ion-icon color="primary" slot="start" name="person-outline"></ion-icon>
+  <ion-label>Editar perfil</ion-label>
+</ion-item>
 <ion-content class="ion-padding-top ion-text-center">
   <ion-avatar>
     <img *ngIf="user.image" [src]="user.image" />
     <ion-icon *ngIf="!user.image" class="empty-icon" name="person-circle-outline"></ion-icon>
   </ion-avatar>
+
   <ion-button class="photo-btn" (click)="takeImage()" mode="ios" size="small" shape="round">
     <ion-icon name="camera-outline"></ion-icon>
   </ion-button>
 
-  <h2>{{user.name}}</h2>
+  <h2>{{ user.name }}</h2>
 
-  <ion-item button detail>
-    <ion-icon color="primary" slot="start" name="person-outline"></ion-icon>
-    <ion-label>Editar perfil</ion-label>
+  <!-- Caja de texto para nuevo nombre -->
+  <ion-item class="update-name-container">
+    <ion-label position="floating">Nuevo Nombre</ion-label>
+    <ion-input [(ngModel)]="nuevoNombre" class="update-name-input"></ion-input>
   </ion-item>
+
+  <!-- Contenedor de botones -->
+  <div class="buttons-container">
+    <!-- Botón para actualizar nombre -->
+    <ion-button class="update-name-btn" (click)="cambiarNombre()" mode="ios" expand="block">
+      Actualizar Nombre
+    </ion-button>
+
+    <!-- Botón para eliminar imagen de perfil -->
+    <ion-button class="delete-image-btn" (click)="deleteImage()" mode="ios" expand="block" color="danger">
+      Eliminar Imagen
+    </ion-button>
+  </div>
+
+  
 </ion-content>
