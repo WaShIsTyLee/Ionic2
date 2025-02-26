@@ -49,19 +49,24 @@ import { SupabaseService } from 'src/app/services/supabase.service';
   ],
 })
 export class AddUpdateMiniatureComponent implements OnInit {
+logFormulario() {
+console.log(this.form)}
   @Input() miniature: Miniature | null = null;
   supabaseService = inject (SupabaseService);
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
 
+
   user = {} as User;
 
   form = new FormGroup({
-    id: new FormControl(''),
     image: new FormControl('', [Validators.required]),
+    id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    units: new FormControl(1, [Validators.required, Validators.min(1)]),
-    strength: new FormControl(0, [Validators.required, Validators.min(0)]),
+    fechaIda: new FormControl('', [Validators.required]),
+    fechaVuel: new FormControl('', [Validators.required]),
+    costoDia: new FormControl('', [Validators.required, Validators.min(1)]),
+    dias: new FormControl('', [Validators.required, Validators.min(1)]),
   });
 
   constructor() {
@@ -76,11 +81,21 @@ export class AddUpdateMiniatureComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.user = this.utilsService.getFromLocalStorage('user');
+    this.user = this.utilsService.getFromLocalStorage('user'); // Recupera usuario
+    if (!this.user?.uid) {
+      console.error('Error: Usuario no autenticado');
+      return;
+    }
+    
     if (this.miniature) {
-      this.form.setValue(this.miniature)
+      this.form.setValue({
+        ...this.miniature,
+        costoDia: String(this.miniature.costoDia),
+        dias: String(this.miniature.dias),
+      });
     }
   }
+  
 
   async takeImage() {
     const dataUrl = (
@@ -90,6 +105,7 @@ export class AddUpdateMiniatureComponent implements OnInit {
       this.form.controls.image.setValue(dataUrl);
     }
   }
+
 
   async submit() {
     if (this.form.valid) {

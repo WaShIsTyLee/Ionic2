@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
     const path: string = `users/${user.uid}/miniatures`;
 
     const queryOptions: QueryOptions = {
-      orderBy: { field: 'strength', direction: 'desc' },
+      orderBy: { field: 'dias', direction: 'desc' },
     };
 
     let timer: any;
@@ -106,7 +106,7 @@ export class HomePage implements OnInit {
   }
 
   getTotalPower() {
-    return this.miniatures.reduce((accumulator, miniature) =>  accumulator + miniature.strength * miniature.units, 0)
+    return this.miniatures.reduce((accumulator, miniature) =>  accumulator + miniature.dias * miniature.costoDia, 0)
   }
 
   async addUpdateMiniature(miniature?: Miniature) {
