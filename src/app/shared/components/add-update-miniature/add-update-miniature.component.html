@@ -37,40 +37,80 @@
     </div>
 
     <app-custom-input
-      [control]="form.controls.units"
+      [control]="form.controls.dias"
       type="number"
-      label="Unidades"
+      label="Dias"
     ></app-custom-input>
 
     <div
       class="validators"
-      *ngIf="form.controls.units.errors && form.controls.units.touched"
+      *ngIf="form.controls.dias.errors && form.controls.dias.touched"
     >
-      <div *ngIf="form.controls.units.errors?.['required']">
+      <div *ngIf="form.controls.dias.errors?.['required']">
         Debe especificar un número de unidades
       </div>
-      <div *ngIf="form.controls.units.errors?.['min']">
+      <div *ngIf="form.controls.dias.errors?.['min']">
         Debe añadir al menos una unidad
       </div>
     </div>
 
     <app-custom-input
-      [control]="form.controls.strength"
+      [control]="form.controls.costoDia"
       type="number"
-      label="Fuerza"
+      label="Costo Dia"
     ></app-custom-input>
 
     <div
       class="validators"
-      *ngIf="form.controls.strength.errors && form.controls.strength.touched"
+      *ngIf="form.controls.costoDia.errors && form.controls.costoDia.touched"
     >
-      <div *ngIf="form.controls.strength.errors?.['required']">
+      <div *ngIf="form.controls.costoDia.errors?.['required']">
         Debe especificar un número de unidades
       </div>
-      <div *ngIf="form.controls.strength.errors?.['min']">
+      <div *ngIf="form.controls.costoDia.errors?.['min']">
         La fuerza mínima es 0.
       </div>
     </div>
+
+
+
+    <app-custom-input
+    [control]="form.controls.fechaIda"
+    type="date"
+    label="Fecha Ida"
+  ></app-custom-input>
+
+  <div
+    class="validators"
+    *ngIf="form.controls.fechaIda.errors && form.controls.fechaIda.touched"
+  >
+    <div *ngIf="form.controls.costoDia.errors?.['required']">
+      Debe especificar un número de unidades
+    </div>
+    <div *ngIf="form.controls.costoDia.errors?.['min']">
+      La fuerza mínima es 0.
+    </div>
+  </div>
+<app-custom-input
+[control]="form.controls.fechaVuel"
+type="date"
+label="Fecha Vuelta"
+></app-custom-input>
+
+<div
+class="validators"
+*ngIf="form.controls.fechaVuel.errors && form.controls.fechaVuel.touched"
+>
+<div *ngIf="form.controls.costoDia.errors?.['required']">
+  Debe especificar un número de unidades
+</div>
+<div *ngIf="form.controls.costoDia.errors?.['min']">
+  La fuerza mínima es 0.
+</div>
+</div>
+<ion-button (click)="logFormulario()" expand="block" fill="clear" shape="round">
+  Click me
+</ion-button>
 
     <ion-button
       mode="ios"
