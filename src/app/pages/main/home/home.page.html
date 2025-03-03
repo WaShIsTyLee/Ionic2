@@ -11,56 +11,42 @@
       <p>Tus Viajes</p>
     </div>
     <div>
-      <h5>{{ getTotalPower() }}</h5>
+      <pre>    </pre>
+    </div>
+    <div>
+      <h5>{{ getTotalPower() }} €</h5>
       <p>Gasto Total</p>
     </div>
   </ion-card>
 
-  <ion-list *ngIf="!loading">
-    <ion-item-sliding *ngFor="let miniature of miniatures" class="miniature-item">
-      <ion-item>
-        <ion-avatar slot="start">
-          <img [src]="miniature.image" />
-        </ion-avatar>
-        <ion-label>
-          <div class="name">{{ miniature.name }}</div>
-          <div class="data">
-            <strong>Fecha Ida:</strong> {{ miniature.fechaIda }} <br />
-            <strong>Fecha Vuelta:</strong> {{ miniature.fechaVuel }} <br />
-            <strong>Días:</strong> {{ miniature.dias }} <br />
-            <strong>Costo por Día:</strong> {{ miniature.costoDia }}
+  <ion-grid *ngIf="!loading">
+    <ion-row>
+      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let miniature of miniatures">
+        <ion-card class="miniature-card">
+          <div id="{{ miniature.id }}" class="card-container" [class.flipped]="rotatedMiniatureId === miniature.id" (click)="toggleRotate(miniature.id)">
+            <!-- Parte delantera de la tarjeta -->
+            <div class="card-front">
+              <ion-avatar>
+                <img class="avatar-image" [src]="miniature.image" />
+              </ion-avatar>
+              <div class="name">{{ miniature.name }}</div>
+              <div class="data">
+                <strong>Fecha Ida:</strong> {{ miniature.fechaIda }} <br />
+                <strong>Fecha Vuelta:</strong> {{ miniature.fechaVuel }} <br />
+                <strong>Días:</strong> {{ miniature.dias }} <br />
+                <strong>Costo por Día:</strong> {{ miniature.costoDia }} €
+              </div>
+            </div>
+            <!-- Parte trasera de la tarjeta con botones -->
+            <div class="card-back">
+              <ion-button (click)="addUpdateMiniature(miniature)" class="editar" color="success">Editar</ion-button>
+              <ion-button (click)="confirmDeleteMiniature(miniature)" class="eliminar " color="danger">Eliminar</ion-button>
+            </div>
           </div>
-          <ion-chip color="primary" mode="ios" outline="true">
-            Costo Total: {{ miniature.dias * miniature.costoDia }}
-          </ion-chip>
-        </ion-label>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option (click)="addUpdateMiniature(miniature)">
-          <ion-icon class="option-btn" name="create-outline"></ion-icon>
-        </ion-item-option>
-        <ion-item-option (click)="confirmDeleteMiniature(miniature)" color="danger">
-          <ion-icon class="option-btn" name="trash-outline"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-
-  <ion-list *ngIf="loading">
-    <ion-item *ngFor="let i of [1,1,1,1,1,1,1,1]" class="miniature-item">
-      <ion-avatar slot="start">
-        <ion-skeleton-text animated style="width: 100%; height: 100%"></ion-skeleton-text>
-      </ion-avatar>
-      <ion-label>
-        <div>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-        </div>
-        <div>
-          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
-        </div>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <div *ngIf="!loading && miniatures.length == 0" class="empty">
     <ion-icon name="body-outline"></ion-icon>
