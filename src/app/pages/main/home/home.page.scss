@@ -1,57 +1,144 @@
+/* Modificación para pantallas grandes */
 @media (min-width: 769px) {
     .add-update-modal {
         --height: 680px;
     }
 }
-.miniature-item {
-    --padding-top: 20px;
 
-    ion-avatar {
-        width: 70px;
-        height: 80px;
-        --border-radius: 15px;
-    }
-
-    .name {
-        font-weight: 600;
-        padding-bottom: 5px;
-    }
-
-    .data {
-        font-size: 13px;
-
-        strong {
-            font-weight: 500;
-        }
-    }
-
-    .option-btn {
-        font-size: 27px;
-    }
-
-    ion-chip {
-        font-size: 14px;
-        border-radius: 10px;
-        margin-left: 0;
-    }
+/* Contenedor de la cuadrícula */
+ion-grid {
+    width: 100%;
+    padding: 10px;
 }
 
+/* Ajuste de las tarjetas para que sean más pequeñas y se alineen en filas */
+ion-card.miniature-card {
+    width: 100%;
+    max-width: 300px; /* Tamaño máximo de cada tarjeta */
+    height: 300px;
+    margin: 10px auto; /* Espaciado entre tarjetas */
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+ion-card.miniature-card:hover {
+    transform: scale(1.05);
+}
+
+/* Contenedor de cada tarjeta con efecto de volteo */
+.card-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s; /* Asegura que el giro tenga una animación */
+}
+
+/* Cuando la tarjeta está volteada */
+.card-container.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Lados de la tarjeta */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #777;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Asegura que la imagen quede en la parte superior */
+    padding: 20px;
+    text-align: center;
+    transition: all 0.6s ease;
+}
+
+/* Lado posterior (donde están los botones) */
+.card-back {
+    transform: rotateY(180deg);
+    background: #777;/* Color de fondo trasero */
+    padding-top: 100px;
+ 
+}
+
+/* Avatar dentro de la tarjeta (más grande y cuadrado) */
+ion-avatar {
+    width: 120px; /* Aumentar tamaño */
+    height: 120px;
+    margin-bottom: 15px; /* Espacio entre la imagen y el texto */
+}
+
+ion-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0; /* Imagen cuadrada */
+    object-fit: cover; /* Mantiene las proporciones sin distorsión */
+}
+
+/* Ajuste del texto para que quede debajo */
+.name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px; /* Espacio entre la imagen y el nombre */
+}
+
+.data {
+    font-size: 14px;
+    color : #333;
+}
+
+/* Estilos de los botones de acción (detrás de la tarjeta) */
+.card-back ion-item-option {
+    font-size: 16px;
+    padding: 0 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 100px; /* Espacio entre los botones y el contenido */
+}
+
+/* Botones de acción al pasar el mouse */
+.card-back ion-item-option:hover {
+    background-color: #f0f0f0;
+}
+
+/* Estilo de botones flotantes (fab) */
+ion-fab-button {
+    
+    color: rgb(189, 40, 40);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+ion-fab-button:hover {
+   
+}
+
+/* Mensaje cuando no hay miniaturas */
 .empty {
     text-align: center;
     padding: 60px;
-    opacity: 30%;
-
-    ion-icon {
-        font-size: 100px;
-    }
+    opacity: 0.5;
+    color: #777;
 }
 
-ion-card {
-    gap: 100px;
-    padding: 20px 0;
-    border-radius: 15px;
+.empty ion-icon {
+    font-size: 100px;
+    color: #ddd;
 }
 
-.miniatures-list {
-    padding-bottom: 70px;
+.empty h3 {
+    font-size: 18px;
+    color: #333;
 }
+
+
+
+

@@ -13,5 +13,6 @@
     fechaVuel : string;
     costoDia: number;
     dias: number;
+    flipped?: boolean;  
   }
 
