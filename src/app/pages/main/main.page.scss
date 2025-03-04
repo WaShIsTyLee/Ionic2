@@ -1,45 +1,51 @@
 ion-content {
-    --background: var(--ion-color-primary);
-    --color: var(--ion-color-primary-contrast);
-    --padding-top: 28px;
+  --background: #800000; /* Fondo rojo granate */
+  --color: #ffffff; /* Texto en blanco para contraste */
+  --padding-top: 28px;
+}
+
+ion-item {
+  font-size: 14px;
+  color: #f8f8f8; /* Texto en un color claro */
+  --background: #600000; /* Fondo más oscuro para contraste */
+
+  ion-icon {
+    color: #f8f8f8;
   }
-  
-  ion-item {
-    font-size: 14px;
-    color: var(--ion-color-light);
-    --background: var(--ion-color-primary);
-  
+
+  &.active {
+    color: #ffcc00; /* Color de advertencia (amarillo) */
+
     ion-icon {
-      color: var(--ion-color-light);
-    }
-  
-    &.active {
-      color: var(--ion-color-warning);
-  
-      ion-icon {
-        color: var(--ion-color-warning);
-      }
+      color: #ffcc00;
     }
   }
-  
-  ion-menu {
-    --width: 254px;
-    --min-width: 254px;
-  
-    outline: none;
-  }
-  
-  h4 {
-    margin-top: 5px;
-    font-weight: bold;
-  }
-  
-  .avatar-icon {
-    font-size: 100px;
-  }
-  
-  ion-avatar {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-  }
+}
+
+/* Menú lateral */
+ion-menu {
+  --width: 254px;
+  --min-width: 254px;
+  --background: #700000; /* Color de fondo del menú */
+  outline: none;
+}
+
+h4 {
+  margin-top: 5px;
+  font-weight: bold;
+  color: #fff; /* Texto blanco */
+}
+
+/* Icono de avatar grande */
+.avatar-icon {
+  font-size: 100px;
+  color: #ffcc00; /* Amarillo para destacar */
+}
+
+/* Tamaño del avatar */
+ion-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  border: 2px solid #ffcc00; /* Borde amarillo */
+}

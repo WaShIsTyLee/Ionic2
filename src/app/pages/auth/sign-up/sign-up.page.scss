@@ -1,10 +1,37 @@
-.signup-form{
-    width: 100%;
-    text-align: center;
-    padding: 20px;
+/* Botón principal */
+ion-button {
+    background: #800000 !important; /* Fondo granate */
+    color: #ffffff !important; /* Texto blanco */
+    border-radius: 8px !important; /* Bordes redondeados */
+    font-weight: bold !important;
+    border: none !important;
 }
-@media (min-width: 769px) {
-    .signup-form {
-        width: 500px;
-    }
+
+/* Botón cuando está en hover (pasa el cursor) */
+ion-button:hover {
+    background: #6f0000 !important; /* Tono más oscuro */
+}
+
+/* Botón cuando está activo (clic) */
+ion-button:active {
+    background: #990000 !important; /* Tono más claro */
+}
+
+/* Botones de tipo "outline" */
+ion-button.button-outline {
+    border: 2px solid #800000 !important; /* Borde granate */
+    color: #800000 !important; /* Texto granate */
+    background: transparent !important;
+}
+
+/* Botones de tipo "clear" */
+ion-button.button-clear {
+    color: #800000 !important;
+    background: transparent !important;
+}
+
+/* Botón dentro de modales o alertas */
+.alert-button, .modal-button, .action-sheet-button {
+    background: #800000 !important;
+    color: #ffffff !important;
 }

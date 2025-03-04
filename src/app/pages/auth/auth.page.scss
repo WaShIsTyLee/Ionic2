@@ -4,10 +4,47 @@
     padding: 20px;
 }
 
-
-
+/* Ajuste de ancho en pantallas grandes */
 @media (min-width: 769px) {
     .auth-form {
         width: 500px;
     }
+}
+
+/* Estilos para los botones */
+ion-button {
+    --background: #800000 !important; /* Fondo granate */
+    --color: #ffffff !important; /* Texto blanco */
+    --border-radius: 8px !important; /* Bordes redondeados */
+    font-weight: bold !important;
+    border: none !important;
+}
+
+/* Botón en hover (cuando pasas el cursor) */
+ion-button:hover {
+    --background: #6f0000 !important; /* Tono más oscuro */
+}
+
+/* Botón cuando está activo (clic) */
+ion-button:active {
+    --background: #990000 !important; /* Tono más claro */
+}
+
+/* Botón con borde (outline) */
+ion-button[fill="outline"] {
+    --border-color: #800000 !important; /* Borde granate */
+    --color: #800000 !important; /* Texto granate */
+    --background: transparent !important;
+}
+
+/* Texto del enlace "Olvidé mi contraseña" */
+p.ion-text-end {
+    color: white !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Asegurar que los inputs tengan el mismo esquema de color */
+app-custom-input {
+    --color: #800000 !important;
 }
