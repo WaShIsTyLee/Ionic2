@@ -37,20 +37,24 @@
                 <strong>Costo por Día:</strong> {{ miniature.costoDia }} €
               </div>
             </div>
-            <!-- Parte trasera de la tarjeta con botones -->
+            <!-- Parte trasera de la tarjeta con botones centrados -->
             <div class="card-back">
-              <ion-button (click)="addUpdateMiniature(miniature)" class="editar" color="success">Editar</ion-button>
-              <ion-button (click)="confirmDeleteMiniature(miniature)" class="eliminar " color="danger">Eliminar</ion-button>
+              <pre>
+                
+                
+<ion-button (click)="addUpdateMiniature(miniature)" class="editar" color="success">Editar</ion-button>
+<ion-button (click)="confirmDeleteMiniature(miniature)" class="eliminar" color="danger">Eliminar</ion-button>
+              </pre>
             </div>
           </div>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+  
 
   <div *ngIf="!loading && miniatures.length == 0" class="empty">
-    <ion-icon name="airplane"></ion-icon>
-        <h3>Aún no has agregado ningun viaje</h3>
+    <ion-icon name="airplane"></ion-icon>    <h3>Aún no has agregado ningun viaje</h3>
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
