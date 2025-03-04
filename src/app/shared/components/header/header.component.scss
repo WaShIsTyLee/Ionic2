@@ -1,3 +1,45 @@
-.wmm {
+/* Quitar borde inferior */
+ion-header {
+    --background: #800000 !important;
+    background: #800000 !important;
+    border-bottom: none !important;
+  }
+  
+  /* Estilos para la barra superior */
+  ion-toolbar {
+    --background: #800000 !important; /* Fondo granate */
+    background: #800000 !important;
+    --color: #ffffff !important; /* Texto en blanco */
+    color: #ffffff !important;
+    box-shadow: none !important; /* Sin sombra */
+    border-bottom: none !important;
+  }
+  
+  /* Botones y menú */
+  ion-buttons,
+  ion-back-button,
+  ion-menu-button,
+  ion-button {
+    --color: #ffffff !important;
+    color: #ffffff !important;
+  }
+  
+  /* Iconos */
+  ion-icon {
+    color: #ffffff !important;
+  }
+  
+  /* Título */
+  ion-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff !important;
+  }
+  
+  /* Subtítulo "JuMa Viajes" */
+  .wmm {
     font-size: 13px;
-}
+    color: #ffffff !important;
+    opacity: 0.8;
+  }
+  

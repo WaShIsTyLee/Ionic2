@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { addIcons } from 'ionicons';
-import { add, createOutline, trashOutline, bodyOutline } from 'ionicons/icons';
+import { add, createOutline, trashOutline, bodyOutline, airplane } from 'ionicons/icons';
 import { Miniature } from 'src/app/models/miniature.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
   rotatedMiniatureId: string | null = null;
 
   constructor() {
-    addIcons({ createOutline, trashOutline, bodyOutline, add });
+    addIcons({ createOutline, trashOutline, airplane, add });
   }
 
   ngOnInit() {}
