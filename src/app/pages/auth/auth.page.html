@@ -52,19 +52,21 @@
         [disabled]="form.invalid"
       >
         Iniciar sesión
-       <ion-icon slot="end" name="log-in-outline"></ion-icon> 
+        <ion-icon slot="end" name="log-in-outline"></ion-icon> 
       </ion-button>
 
       <ion-button
-        routerLink="/sign-up"
+        routerLink="/sign-up" 
         class="ion-margin-top"
         mode="ios"
         expand="block"
-        fill="outline"
+        fill="solid" 
+        style="background: #800000 !important; color: #ffffff !important;"
       >
         Crear usuario
         <ion-icon slot="end" name="person-add-outline"></ion-icon>
       </ion-button>
+
     </form>
   </div>
 </ion-content>

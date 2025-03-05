@@ -7,6 +7,20 @@ ion-button {
     border: none !important;
 }
 
+.signup-form {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Ajuste de ancho en pantallas grandes */
+@media (min-width: 769px) {
+    .signup-form {
+        width: 500px;
+    }
+}
+
+
 /* Botón cuando está en hover (pasa el cursor) */
 ion-button:hover {
     background: #6f0000 !important; /* Tono más oscuro */
@@ -35,3 +49,17 @@ ion-button.button-clear {
     background: #800000 !important;
     color: #ffffff !important;
 }
+
+ion-button.submit {
+    background: #800000 !important;
+    color: #ffffff !important;
+}
+
+ion-button.submit:hover {
+    background: #6f0000 !important;
+}
+
+ion-button.submit:active {
+    background: #990000 !important;
+}
+

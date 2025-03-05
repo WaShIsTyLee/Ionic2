@@ -2,7 +2,7 @@
 <ion-content>
   <div class="d-flex-center">
     <form [formGroup]="form" class="signup-form" (ngSubmit)="submit()">
-      <app-logo></app-logo>
+      <app-logo ></app-logo>
 
       <app-custom-input
         icon="person-outline"
@@ -61,15 +61,15 @@
       </div>
 
       <ion-button
-        mode="ios"
-        expand="block"
-        class="submit"
-        type="submit"
-        [disabled]="form.invalid"
-      >
-        Crear usuario
-        <ion-icon slot="end" name="person-add-outline"></ion-icon>
-      </ion-button>
+  expand="block"
+  class="submit"
+  type="submit"
+  [disabled]="form.invalid"
+  style="background: #800000 !important; color: #ffffff !important;">
+  Crear usuario
+  <ion-icon slot="end" name="person-add-outline"></ion-icon>
+</ion-button>
+
     </form>
   </div>
 </ion-content>
