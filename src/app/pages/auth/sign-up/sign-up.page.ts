@@ -86,8 +86,8 @@ export class SignUpPage implements OnInit {
                 this.form.controls.uid.setValue(uid);
                 this.setUserInfo(uid);
 
-                // 🔹 Vibración al completar el registro
-                await Haptics.impact({ style: ImpactStyle.Medium });
+                // Vibración más larga (1000 ms o 1 segundo)
+                await Haptics.vibrate({ duration: 1000 });
             })
             .catch((error) => {
                 this.utilsService.presentToast({
@@ -97,6 +97,9 @@ export class SignUpPage implements OnInit {
                     position: 'middle',
                     icon: 'alert-circle-outline',
                 });
+
+                // Vibración más larga al mostrar error
+                Haptics.vibrate({ duration: 1000 });
             })
             .finally(() => {
                 loading.dismiss();
@@ -104,7 +107,7 @@ export class SignUpPage implements OnInit {
     }
 }
 
-  async setUserInfo(uid: string) {
+async setUserInfo(uid: string) {
     if (this.form.valid) {
       const loading = await this.utilsService.loading();
       await loading.present();
@@ -114,10 +117,13 @@ export class SignUpPage implements OnInit {
 
       this.firebaseService
         .setDocument(path, this.form.value)
-        .then((res) => {
+        .then(async (res) => {
           this.utilsService.saveInLocalStorage('user', this.form.value);
           this.form.reset();
           this.utilsService.routerLink('/main/home');
+
+          // Vibración más larga (1000 ms o 1 segundo)
+          await Haptics.vibrate({ duration: 1000 });
         })
         .catch((error) => {
           this.utilsService.presentToast({
@@ -127,10 +133,13 @@ export class SignUpPage implements OnInit {
             position: 'middle',
             icon: 'alert-circle-outline',
           });
+
+          // Vibración más larga al mostrar error
+          Haptics.vibrate({ duration: 1000 });
         })
         .finally(() => {
           loading.dismiss();
         });
     }
-  }
+}
 }

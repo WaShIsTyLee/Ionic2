@@ -69,12 +69,15 @@ export class AuthPage implements OnInit {
   async submit() {
     const loading = await this.utilsService.loading();
     await loading.present();
+
     this.firebaseService
       .signIn(this.form.value as User)
-      .then((res) => {
-        this.getUserInfo(res.user.uid);
+      .then(async (res) => {
+        await this.getUserInfo(res.user.uid);
+        // Vibración más larga (1000 ms o 1 segundo)
+        await Haptics.vibrate({ duration: 1000 });
       })
-      .catch((error) => {
+      .catch(async (error) => {
         this.utilsService.presentToast({
           message: error.message,
           duration: 2500,
@@ -82,6 +85,8 @@ export class AuthPage implements OnInit {
           position: 'middle',
           icon: 'alert-circle-outline',
         });
+        // Vibración más larga al mostrar error
+        await Haptics.vibrate({ duration: 1000 });
       })
       .finally(() => {
         loading.dismiss();
@@ -96,7 +101,7 @@ export class AuthPage implements OnInit {
 
     this.firebaseService
       .getDocument(path)
-      .then((userData: any) => {
+      .then(async (userData: any) => {
         const user: User = userData;
         this.utilsService.saveInLocalStorage('user', user);
         this.utilsService.presentToast({
@@ -106,10 +111,12 @@ export class AuthPage implements OnInit {
           position: 'middle',
           icon: 'person-circle-outline',
         });
+        // Vibración más larga (1000 ms o 1 segundo)
+        await Haptics.vibrate({ duration: 1000 });
         this.form.reset();
         this.utilsService.routerLink('/main/home');
       })
-      .catch((error) => {
+      .catch(async (error) => {
         this.utilsService.presentToast({
           message: error.message,
           duration: 2500,
@@ -117,6 +124,8 @@ export class AuthPage implements OnInit {
           position: 'middle',
           icon: 'alert-circle-outline',
         });
+        // Vibración más larga al mostrar error
+        await Haptics.vibrate({ duration: 1000 });
       })
       .finally(() => {
         loading.dismiss();
