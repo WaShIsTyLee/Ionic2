@@ -25,6 +25,8 @@ import { RouterLink } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { User } from 'src/app/models/user.model';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Haptics } from '@capacitor/haptics'; // Asegúrate de importar Haptics
+
 
 @Component({
   selector: 'app-auth',
